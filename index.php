@@ -132,8 +132,8 @@ $(document).ready(function(){
         </div>
       </div>
       <div class="row">
-        <a class="waves-effect waves-light btn col s3" style="margin:5px;" onclick="setInfluenza();">Spread</a>
-        <a class="waves-effect waves-light btn col s3" style="margin:5px;" onclick="removeInfluenza();">Remove</a>
+        <a class="waves-effect waves-light btn col s6 m3" style="margin:5px;" onclick="setInfluenza();">Spread</a>
+        <a class="waves-effect waves-light btn col s6 m3" style="margin:5px;" onclick="removeInfluenza();">Remove</a>
       </div>
     </div>
   </div>

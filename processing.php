@@ -33,8 +33,10 @@ function childBorn(){
 
   if(isset($_COOKIE['world-influenza'])){
     $childBirthPercentage = rand(0,100);
-    if($childBirthPercentage < 40){
+    //According to research, 80% of the children did not survive ebola
+    if($childBirthPercentage < 80){
       createLog('A child was killed by viruses during birth');
+      echo "updateLog('** If ebola is not stopped, more citizens will die!!');";
       exit;
     }
   }
