@@ -40,12 +40,18 @@ function deleteCookie(){
 
 function setInfluenza(){
   document.cookie = "world-influenza=ebola; expires=0; path=/;";
-  Materialize.toast('Ebola will take effect', 3000, 'rounded')
+  Materialize.toast('Ebola will take effect', 3000, 'rounded');
 }
 
 function removeInfluenza(){
   document.cookie = "world-influenza=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   Materialize.toast('Removed ebola from world', 3000, 'rounded')
+}
+
+function sendEarthquake(){
+  document.cookie = "world-earthquake=sent; expires=0; path=/;";
+  Materialize.toast('Earthquake sent', 3000, 'rounded');
+	$('#triggerInfluenza').modal('close');
 }
 
 setInterval("my_function();",2000);
@@ -71,7 +77,6 @@ $(document).ready(function(){
     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
   });
-
 </script>
 <body>
   <main>
@@ -124,8 +129,8 @@ $(document).ready(function(){
 
     <div id="triggerInfluenza" class="modal">
     <div class="modal-content">
-      <h4>Trigger Influenza</h4>
-      <p>This panel gives the option to spead viruses to increase the chance of death</p>
+      <h4>Disaster trigger</h4>
+      <p>This panel gives the option increase/decrease the chance of death</p>
       <div class="row">
         <div class="col s12">
           Virus of the day : Ebola
@@ -134,6 +139,11 @@ $(document).ready(function(){
       <div class="row">
         <a class="waves-effect waves-light btn col s6 m3" style="margin:5px;" onclick="setInfluenza();">Spread</a>
         <a class="waves-effect waves-light btn col s6 m3" style="margin:5px;" onclick="removeInfluenza();">Remove</a>
+      </div>
+
+			<p>Earthquake</p>
+			<div class="row">
+          <a class="waves-effect waves-light btn col s6 m3" style="margin:5px;" onclick="sendEarthquake();">Send</a>
       </div>
     </div>
   </div>

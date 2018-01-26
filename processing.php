@@ -6,10 +6,13 @@ if(isset($_POST['action'])){
   } else {
     generateWorld();
   }
-
 }
 
 function doAction(){
+  if(isset($_COOKIE['world-earthquake'])){
+    sendEarthquake();
+    exit;
+  }
   $rand = rand(1,2);
   switch ($rand) {
     case 1: childBorn(); break;
@@ -30,13 +33,12 @@ function generateWorld(){
 }
 
 function childBorn(){
-
   if(isset($_COOKIE['world-influenza'])){
     $childBirthPercentage = rand(0,100);
     //According to research, 80% of the children did not survive ebola
     if($childBirthPercentage < 80){
       createLog('A child was killed by viruses during birth');
-      echo "updateLog('** If ebola is not stopped, more citizens will die!!');";
+      createLog('** If ebola is not stopped, more citizens will die!!');
       exit;
     }
   }
@@ -76,6 +78,35 @@ function death(){
   }
 }
 
+function sendEarthquake(){
+  $earthquakeMag = rand(1,5);
+  $totalWorldPopulation = $_COOKIE['world-population'];
+  unset($_COOKIE['world-earthquake']);
+  setcookie('world-earthquake', null, -1, '/');
+  switch ($earthquakeMag){
+    case 1:
+    $deathAmount = round((($totalWorldPopulation / 100) * 20));
+    earthquakeDeath($earthquakeMag, $deathAmount);
+    case 2:
+    $deathAmount = round((($totalWorldPopulation / 100) * 40));
+    earthquakeDeath($earthquakeMag, $deathAmount);
+    case 3:
+    $deathAmount = round((($totalWorldPopulation / 100) * 60));
+    earthquakeDeath($earthquakeMag, $deathAmount);
+    case 4:
+    $deathAmount = round((($totalWorldPopulation / 100) * 80));
+    earthquakeDeath($earthquakeMag, $deathAmount);
+    case 5:
+    $deathAmount = round((($totalWorldPopulation / 100) * 100));
+    earthquakeDeath($earthquakeMag, $deathAmount);
+  }
+}
+function earthquakeDeath($earthquakeMag, $deathAmount){
+  createLog("An earthquake with magnitude $earthquakeMag hit");
+  createLog("$deathAmount casualties reported");
+  decreasePopulation($deathAmount);
+}
+
 function deathMethod($deathMethod){
   $accidentValue = $_COOKIE['world-' . $deathMethod];
   $accidentValue++;
@@ -96,13 +127,21 @@ function increasePopulation(){
   createLog("Total world population increased to $totalWorldPopulation");
   exit;
 }
-
-function decreasePopulation(){
+function decreasePopulation($amount){
   $totalWorldPopulation = $_COOKIE['world-population'];
-  $totalWorldPopulation--;
+  if(isset($amount)){
+    $totalWorldPopulation = $totalWorldPopulation - $amount;
+  } else {
+    $totalWorldPopulation--;
+  }
   setcookie("world-population", $totalWorldPopulation, 0);
   updateWorldPopulation($totalWorldPopulation);
-  createLog("Total world population decreased to $totalWorldPopulation");
+  if($totalWorldPopulation <= 0){
+    //No more citizen to die
+    createLog('All your citizens are dead');
+  } else {
+    createLog("Total world population decreased to $totalWorldPopulation");
+  }
   exit;
 }
 
@@ -117,5 +156,4 @@ function createLog($createLog){
   $logMsg = $createLog;
   echo "updateLog('$current | $logMsg');";
 }
-
 ?>
