@@ -121,9 +121,9 @@ $(document).ready(function(){
         <i class="material-icons">menu</i>
       </a>
       <ul>
-        <li><a class="btn-floating yellow darken-1" href="#virtualworldhead"><i class="material-icons">arrow_upward</i></a></li>
-        <li><a class="btn-floating orange darken-1 modal-trigger" href="#triggerInfluenza"><i class="material-icons">access_time</i></a></li>
-        <li><a class="btn-floating green" onclick="deleteCookie()"><i class="material-icons">refresh</i></a></li>
+        <li><a class="btn-floating yellow darken-1 tooltipped" data-position="top" data-delay="50" data-tooltip="Back to top" href="#virtualworldhead"><i class="material-icons">arrow_upward</i></a></li>
+        <li><a class="btn-floating orange darken-1 modal-trigger tooltipped" data-position="top" data-delay="50" data-tooltip="Triggers" href="#triggerInfluenza"><i class="material-icons">access_time</i></a></li>
+        <li><a class="btn-floating green tooltipped" data-position="top" data-delay="50" data-tooltip="Clean and refresh world" onclick="deleteCookie()"><i class="material-icons">refresh</i></a></li>
       </ul>
     </div>
 
